@@ -59,7 +59,7 @@ angular.module('nge', ['ionic', 'templates', 'nge.sights'])
             // categories: function (SightsService) {
             //   SightsService.getCategories();
             // },
-            category: function ($stateParams) {
+            cid: function ($stateParams) {
               return $stateParams.cid;
             }
           }
