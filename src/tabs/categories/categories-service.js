@@ -27,9 +27,12 @@ function CategoriesService($http, $q, Routes) {
         });
     };
 
-    this.getActivities = function (categoryIds, tags) {
+    this.getActivities = function (category, tags) {
         return $http.get(Routes.activities, {
-            params: { cid: categoryIds, limit: 25, offset: 0, tag: tags, created: 0, start: 0, end: 0 },
+            params: { cid: category.id, limit: 25, offset: 0, tag: tags, created: 0, start: 0, end: 0 },
+        }).then(function (resp) {
+            category.activities = resp.data.data;
+            return resp;
         });
     };
 

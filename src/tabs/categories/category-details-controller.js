@@ -8,7 +8,7 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
 .controller('CategoryDetailsCtrl', function ($scope, CategoriesService, FavoritesService, $sce, $ionicModal, $ionicLoading, cid) {
 
     var modalScope = $scope.$new();
-    $ionicModal.fromTemplateUrl('my-modal.html', {
+    $ionicModal.fromTemplateUrl('activity-modal.html', {
         scope: modalScope,
         animation: 'slide-in-up'
       }).then(function(modal) {
@@ -19,22 +19,29 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
       template: '<i class="ion-loading-c"></i> <br> Loading activities...'
     });
 
+
     CategoriesService.getCategoryById(cid)
     .then(function (category) {
         $scope.category = category;
         return category;
     })
     .then(function (category) {
-        CategoriesService.getActivities(category.id, universes).then(function (resp) {
-            $scope.activities = resp.data;
+        if (!category.activities) {
+            CategoriesService.getActivities(category, universes).then(function (resp) {
+                $scope.category.activities = resp.data;
+                $ionicLoading.hide();
+            });
+        } else {
             $ionicLoading.hide();
-        });
+        }
     });
 
+
     $scope.showActivityDetails = function (activity) {
-        // activity.description = $sce.trustAsHtml(activity.description);
+        // activity.small_description = $sce.trustAsHtml(activity.small_description);
         modalScope.activity = activity;
         modalScope.addToFavorite = function () {
+            activity.isFavorite = true;
             FavoritesService.addToFavorites(activity);
             $scope.closeModal();
         };
