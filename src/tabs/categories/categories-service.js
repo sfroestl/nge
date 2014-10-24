@@ -1,8 +1,8 @@
-angular.module('nge.sights.SightsService', [])
-.service('SightsService', SightsService);
+angular.module('nge.categories.CategoriesService', [])
+.service('CategoriesService', CategoriesService);
 
 
-function SightsService($http, $q, Routes) {
+function CategoriesService($http, $q, Routes) {
     var categories;
 
     this.getCategoryById = function (id) {

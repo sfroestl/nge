@@ -1,5 +1,10 @@
 angular.module('templates', []);
-angular.module('nge', ['ionic', 'templates', 'nge.sights'])
+angular.module('nge', [
+  'ionic',
+  'templates',
+  'nge.categories',
+  'nge.favorites'
+  ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -35,29 +40,29 @@ angular.module('nge', ['ionic', 'templates', 'nge.sights'])
     })
 
     // Each tab has its own nav history stack:
-    .state('tab.sights', {
-      url: '/sights',
+    .state('tab.categories', {
+      url: '/categories',
       views: {
-        'tab-sights': {
-          templateUrl: 'tabs/sights/sights.html',
-          controller: 'SightsCtrl',
+        'tab-categories': {
+          templateUrl: 'tabs/categories/categories.html',
+          controller: 'CategoriesCtrl',
           resolve: {
-            categories: function (SightsService) {
-              SightsService.getCategories();
+            categories: function (CategoriesService) {
+              CategoriesService.getCategories();
             }
           }
         }
       }
     })
-    .state('tab.sight-detail', {
-      url: '/sights/:cid',
+    .state('tab.category-detail', {
+      url: '/categories/:cid',
       views: {
-        'tab-sights': {
-          templateUrl: 'tabs/sights/sight-details-tpl.html',
-          controller: 'SightDetailsCtrl',
+        'tab-categories': {
+          templateUrl: 'tabs/categories/category-details-tpl.html',
+          controller: 'CategoryDetailsCtrl',
           resolve: {
-            // categories: function (SightsService) {
-            //   SightsService.getCategories();
+            // categories: function (categoriesService) {
+            //   categoriesService.getCategories();
             // },
             cid: function ($stateParams) {
               return $stateParams.cid;
@@ -65,17 +70,16 @@ angular.module('nge', ['ionic', 'templates', 'nge.sights'])
           }
         }
       }
+    })
+    .state('tab.favorites', {
+      url: '/favorites',
+      views: {
+        'tab-favorites': {
+          templateUrl: 'tabs/favorites/favorites-tpl.html',
+          controller: 'FavoritesCtrl'
+        }
+      }
     });
-
-    // .state('tab.dash', {
-    //   url: '/dash',
-    //   views: {
-    //     'tab-dash': {
-    //       templateUrl: 'templates/tab-dash.html',
-    //       controller: 'DashCtrl'
-    //     }
-    //   }
-    // })
 
     // .state('tab.friends', {
     //   url: '/friends',
@@ -107,7 +111,7 @@ angular.module('nge', ['ionic', 'templates', 'nge.sights'])
     // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/sights');
+  $urlRouterProvider.otherwise('/tab/categories');
 
 });
 
