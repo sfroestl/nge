@@ -1,9 +1,12 @@
 <ion-view title="Your Favorites">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="activity in favorites" type="item-text-wrap">
-        {{activity.nom}}
-        <button ng-click="removeFromFavorites(activity, $index)"><i class="ion-ios7-trash-outline"></i></button>
+      <ion-item ng-repeat="activity in favorites" type="item-text-wrap" class="item-button-right">
+        <span ng-bind-html="activity.nom"></span>
+        <button ng-click="removeFromFavorites(activity, $index)"
+        class="button button-assertive button-outline">
+            <i class="ion-ios7-trash-outline"></i>
+         </button>
       </ion-item>
     </ion-list>
   </ion-content>

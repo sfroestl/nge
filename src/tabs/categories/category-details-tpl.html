@@ -32,19 +32,5 @@
 </ion-view>
 
 <script id="activity-modal.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title" ng-bind-html="activity.nom"></h1>
-      <button class="button" ng-click="closeModal()"><i class="ion-close-round"></i></button>
-    </ion-header-bar>
-    <ion-content>
-      <div>
-        <p ng-bind-html="activity.small_description"></p>
-        <p>{{activity.adresse}}, {{activity.zipcode}} {{activity.city}}</p>
-      </div>
 
-
-      <button class="button button-full button-positive" ng-click="addToFavorite()">Add to favorites</button>
-    </ion-content>
-  </ion-modal-view>
 </script>

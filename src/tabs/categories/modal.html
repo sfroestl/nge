@@ -1,0 +1,21 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title" ng-bind-html="activity.nom"></h1>
+    <button class="button" ng-click="closeModal()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content>
+    <div style="padding:20px">
+    <div class="list card">
+
+      <a class="item item-icon-left">
+        <p>{{activity.adresse}}, {{activity.zipcode}} {{activity.city}}</p>
+      </a>
+    </div>
+      <div ng-bind-html="activity.small_description"></div>
+    </div>
+
+
+    <button class="button button-full button-positive" ng-click="addToFavorite()">
+    <i class="ion-ios7-star">Add to favorites</i></button>
+  </ion-content>
+</ion-modal-view>

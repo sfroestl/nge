@@ -8,7 +8,7 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
 .controller('CategoryDetailsCtrl', function ($scope, CategoriesService, FavoritesService, $sce, $ionicModal, $ionicLoading, cid) {
 
     var modalScope = $scope.$new();
-    $ionicModal.fromTemplateUrl('activity-modal.html', {
+    $ionicModal.fromTemplateUrl('tabs/categories/modal.html', {
         scope: modalScope,
         animation: 'slide-in-up'
       }).then(function(modal) {
@@ -27,7 +27,6 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
     };
 
     $scope.showActivityDetails = function (activity) {
-        // activity.small_description = $sce.trustAsHtml(activity.small_description);
         modalScope.activity = activity;
         modalScope.addToFavorite = function () {
             activity.isFavorite = true;

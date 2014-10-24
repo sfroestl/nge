@@ -10,7 +10,6 @@ function CategoriesService($http, $q, Routes) {
         var defered = $q.defer();
         if (!categories) {
             this.getCategories().then(function (resp) {
-                console.log(findById(id, resp.data));
                 defered.resolve(findById(id, resp.data));
             });
         } else {
