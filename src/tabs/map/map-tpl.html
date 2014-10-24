@@ -1,5 +1,6 @@
 <ion-view title="Map">
-  <ion-content>
-    test
-  </ion-content>
+    <style>.angular-google-map-container, .angular-google-map { height: 100%; }</style>
+    <ui-gmap-google-map options="map.options" class="scroll-content has-header has-tabs" center="map.center" zoom="map.zoom">
+        <ui-gmap-circle center="current.center" stroke="current.stroke" radius="current.radius"></ui-gmap-circle>
+    </ui-gmap-google-map>
 </ion-view>

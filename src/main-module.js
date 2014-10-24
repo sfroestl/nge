@@ -4,7 +4,8 @@ angular.module('nge', [
   'templates',
   'nge.categories',
   'nge.favorites',
-  'nge.map'
+  'nge.map',
+  'google-maps'.ns()
   ])
 
 .run(function($ionicPlatform) {
@@ -27,6 +28,14 @@ angular.module('nge', [
 })
 
 .factory('httpInterceptor', httpInterceptorFactory).config(setupInterceptor)
+
+.config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+    GoogleMapApi.configure({
+        key: 'AIzaSyAimKm-_H-DnluMCTFfziPAQ_4nj8MqeSo',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+}])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
