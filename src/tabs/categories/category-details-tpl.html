@@ -1,16 +1,19 @@
 <ion-view title="{{category.name}}">
   <ion-content has-header="true">
 
-    <div ng-if="category.activities.length > 0">
+      <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="doRefresh()">
+        </ion-refresher>
 
-        <ion-list>
+        <ion-list >
           <div class="item item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="text" ng-model="filter.nom" placeholder="Search activities…">
             </label>
           </div>
-          <ion-item ng-repeat="activity in category.activities  | filter:filter"
+          <ion-item ng-repeat="activity in activities  | filter:filter"
            type="item-text-wrap"
            ng-click="showActivityDetails(activity)">
 
@@ -20,10 +23,10 @@
           </ion-item>
         </ion-list>
 
-    </div>
-    <div ng-if="category.activities.length === 0">
-        Sorry no activities found
-    </div>
+
+      <div ng-if="activities.length === 0">
+          Sorry no activities found
+      </div>
 
   </ion-content>
 </ion-view>

@@ -19,23 +19,12 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
       template: '<i class="ion-loading-c"></i> <br> Loading activities...'
     });
 
+    fetchActivities(cid);
 
-    CategoriesService.getCategoryById(cid)
-    .then(function (category) {
-        $scope.category = category;
-        return category;
-    })
-    .then(function (category) {
-        if (!category.activities) {
-            CategoriesService.getActivities(category, universes).then(function (resp) {
-                $scope.category.activities = resp.data;
-                $ionicLoading.hide();
-            });
-        } else {
-            $ionicLoading.hide();
-        }
-    });
-
+    $scope.doRefresh = function () {
+        CategoriesService.clearActivities($scope.category);
+        fetchActivities(cid);
+    };
 
     $scope.showActivityDetails = function (activity) {
         // activity.small_description = $sce.trustAsHtml(activity.small_description);
@@ -55,5 +44,23 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
 
     $scope.$on('$destroy', function() {
         $scope.modal.remove();
+        $ionicLoading.hide();
     });
+
+    function fetchActivities (cid) {
+        CategoriesService.getCategoryById(cid)
+        .then(function (category) {
+            $scope.category = category;
+            return category;
+        })
+        .then(function (category) {
+            CategoriesService.getActivities(category, universes).then(function (data) {
+                $scope.activities = data;
+            }).finally(function () {
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        });
+    }
 });
+

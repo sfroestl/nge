@@ -4,6 +4,7 @@ angular.module('nge.categories.CategoriesService', [])
 
 function CategoriesService($http, $q, Routes) {
     var categories;
+    var activitiesCache = {};
 
     this.getCategoryById = function (id) {
         var defered = $q.defer();
@@ -20,7 +21,7 @@ function CategoriesService($http, $q, Routes) {
 
     this.getCategories = function () {
         return $http.get(Routes.categories, {
-            // cache: true
+            cache: true
         }).then(function (resp) {
             categories = resp.data;
             return resp;
@@ -28,12 +29,16 @@ function CategoriesService($http, $q, Routes) {
     };
 
     this.getActivities = function (category, tags) {
-        return $http.get(Routes.activities, {
-            params: { cid: category.id, limit: 25, offset: 0, tag: tags, created: 0, start: 0, end: 0 },
+        return activitiesCache[category.id] ? $q.when(activitiesCache[category.id]) : $http.get(Routes.activities, {
+            params: { cid: category.id, limit: 25, offset: 0, tag: tags, created: 0, start: 0, end: 0 }
         }).then(function (resp) {
-            category.activities = resp.data.data;
-            return resp;
+            activitiesCache[category.id] = resp.data;
+            return resp.data;
         });
+    };
+
+    this.clearActivities = function (category) {
+        activitiesCache[category.id] = null;
     };
 
     function findById (id, list) {
