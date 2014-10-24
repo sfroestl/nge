@@ -6,20 +6,29 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
   js: ['./src/**/*.js'],
+  templates: ['./src/**/*.html'],
   dest: {
     js: './www/js/'
   }
 };
 
-gulp.task('default', ['sass', 'script']);
+gulp.task('default', ['sass', 'templates', 'script']);
+
+gulp.task('templates', function (done) {
+  gulp.src(paths.templates)
+  .pipe(templateCache('templates.js'))
+  .pipe(gulp.dest(paths.dest.js))
+  .on('end', done);
+});
 
 gulp.task('script', function (done) {
   gulp.src(paths.js)
-  .pipe(concat('ng-app.js'))
+  .pipe(concat('app.js'))
   .pipe(gulp.dest(paths.dest.js))
   .on('end', done);
 });
@@ -36,9 +45,10 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['default'], function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.js, ['script']);
+  gulp.watch(paths.templates, ['templates']);
 });
 
 gulp.task('install', ['git-check'], function() {
