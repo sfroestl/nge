@@ -72,6 +72,23 @@ angular.module('nge', [
         }
       }
     })
+    // .state('tab.category-detail.activity', {
+    //   url: '/activities/:aid',
+    //   views: {
+    //     'tab-categories': {
+    //       templateUrl: 'tabs/categories/activity-details-tpl.html',
+    //       controller: 'ActivityDetailsCtrl',
+    //       resolve: {
+    //         aid: function ($stateParams) {
+    //           return $stateParams.aid;
+    //         },
+    //         cid: function ($stateParams) {
+    //           return $stateParams.cid;
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
     .state('tab.favorites', {
       url: '/favorites',
       views: {

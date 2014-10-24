@@ -12,7 +12,7 @@
           </div>
           <ion-item ng-repeat="activity in activities  | filter:filter"
            type="item-text-wrap"
-           ng-href="#/categories/{{category.id}}/activities/{{activity.idactivites}}">
+           ng-click="showActivityDetails(activity)">
 
             <span ng-bind-html="activity.nom"></span>
             <a ng-click="addToFavorites(activity)"><i class="ion-ios7-star"></i></a>
@@ -27,3 +27,21 @@
 
   </ion-content>
 </ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title" ng-bind-html="activity.nom"></h1>
+      <button class="button" ng-click="closeModal()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-content>
+      <div>
+        <h3>Description</h3>
+        <span ng-bind-html="activity.small_description"></span>
+      </div>
+
+
+      <button class="button button-full button-positive" ng-click="addToFavorite()">Add to favorites</button>
+    </ion-content>
+  </ion-modal-view>
+</script>
