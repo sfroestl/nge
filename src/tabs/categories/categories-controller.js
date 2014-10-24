@@ -8,7 +8,6 @@ function CategoriesCtrl($scope, CategoriesService, $ionicLoading) {
     });
 
     CategoriesService.getCategories().then(function (resp) {
-        console.log(resp);
         $scope.categories = resp.data;
         var categoryIds = resp.data.map(function (c) {
             return c.id;

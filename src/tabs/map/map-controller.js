@@ -28,18 +28,15 @@ angular.module('nge.map', [])
         radius: 50
     };
 
-    $scope.favorites = FavoritesService.getFavorites().map(function (favourite) {
+    $scope.favorites = FavoritesService.getFavorites().map(function (favorite) {
         return {
-            id: favourite.idactivites,
-            latitude: favourite.lat,
-            longitude: favourite.lon
+            id: favorite.idactivites,
+            latitude: favorite.lat,
+            longitude: favorite.lon
         };
     });
 
-    console.log($scope.favorites);
-
     navigator.geolocation.getCurrentPosition(function (position) {
-        console.log('ok');
         $scope.$apply(function () {
             $scope.map.center.latitude = position.coords.latitude;
             $scope.map.center.longitude = position.coords.longitude;
@@ -47,7 +44,6 @@ angular.module('nge.map', [])
     });
 
     var watchId = navigator.geolocation.watchPosition(function (position) {
-        console.log(position);
         $scope.$apply(function () {
             $scope.map.center.latitude = position.coords.latitude;
             $scope.map.center.longitude = position.coords.longitude;
