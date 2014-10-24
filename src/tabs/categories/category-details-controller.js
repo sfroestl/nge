@@ -3,7 +3,7 @@ var universes = [6, 7, 4, 1, 3, 42, 43, 44, 39, 2, 5, 41, 40, 8, 45];
 
 angular.module('nge.categories.CategoryDetailsCtrl', [
     'nge.categories.CategoriesService',
-    'nge.favorites.FavoritesCtrl'
+    'nge.favorites'
 ])
 .controller('CategoryDetailsCtrl', function ($scope, CategoriesService, FavoritesService, $sce, $ionicModal, $ionicLoading, cid) {
 

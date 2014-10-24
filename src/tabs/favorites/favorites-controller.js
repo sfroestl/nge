@@ -1,5 +1,4 @@
-angular.module('nge.favorites.FavoritesCtrl', [
-    // 'nge.favorites.FavoritesService'
+angular.module('nge.favorites', [
 ])
 .controller('FavoritesCtrl', function ($scope, FavoritesService) {
     $scope.favorites = FavoritesService.getFavorites();
