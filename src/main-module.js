@@ -3,7 +3,8 @@ angular.module('nge', [
   'ionic',
   'templates',
   'nge.categories',
-  'nge.favorites'
+  'nge.favorites',
+  'nge.map'
   ])
 
 .run(function($ionicPlatform) {
@@ -77,6 +78,15 @@ angular.module('nge', [
         'tab-favorites': {
           templateUrl: 'tabs/favorites/favorites-tpl.html',
           controller: 'FavoritesCtrl'
+        }
+      }
+    })
+    .state('tab.maps', {
+      url: '/map',
+      views: {
+        'tab-map': {
+          templateUrl: 'tabs/map/map-tpl.html',
+          controller: 'MapCtrl'
         }
       }
     });

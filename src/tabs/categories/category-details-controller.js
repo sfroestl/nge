@@ -6,15 +6,17 @@ angular.module('nge.categories.CategoryDetailsCtrl', [
 ])
 .controller('CategoryDetailsCtrl', function ($scope, CategoriesService, $sce, $ionicLoading, cid) {
 
+    $ionicLoading.show({
+      template: '<i class="ion-loading-c"></i> <br> Loading activities...'
+    });
+
     CategoriesService.getCategoryById(cid)
     .then(function (category) {
         $scope.category = category;
         return category;
     })
     .then(function (category) {
-        $ionicLoading.show({
-          template: '<i class="ion-loading-c"></i> <br> Loading activities...'
-        });
+
         CategoriesService.getActivities(category.id, universes).then(function (resp) {
             $scope.activities = resp.data;
             $ionicLoading.hide();
